@@ -60,7 +60,7 @@
         
         <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	     <!-- 文件最大尺寸 -->
-	     <property name="maxUploadSize" value="#{1024*1024}"></property>
+	     <property name="maxUploadSize" value="#{1024*1024*1024}"></property>
 	     <!-- 每秒缓存多少自己 -->
 	     <property name="maxInMemorySize" value="4094"></property>
 	     <!-- 指定编码格式 -->

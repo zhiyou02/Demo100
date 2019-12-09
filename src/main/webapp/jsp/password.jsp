@@ -11,16 +11,16 @@
 <meta name="renderer" content="webkit">
 <meta name="keywords" content="Web前端视频教程,大数据视频教程,HTML5视频教程,UI视频教程,PHP视频教程,java视频教程,python基础教程"><meta name="description" content="智游教育在线课程视频,为您提供java,python,HTML5,UI,PHP,大数据等学科经典视频教程在线浏览学习,精细化知识点解析,深入浅出,想学不会都难,智游教育,学习成就梦想！">
     
-<link rel="stylesheet" href="http://localhost:8080/Job100/css/base.css">
-<link rel="stylesheet" href="http://localhost:8080/Job100/css/profile.css">
-<link rel="icon" href="http://localhost:8080/Job100/img/avatar_lg.png" type="image/png">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
+<link rel="icon" href="${pageContext.request.contextPath}/img/avatar_lg.png" type="image/png">
 
 <title>修改密码</title>
 </head>
 <body class="w100">  
 <header>
 	<div class="container top_bar clearfix">
-		<img src="img/logo.png" alt="智游">
+		<img src="${pageContext.request.contextPath}/img/logo.png" alt="智游">
 		<div id="tele">
 			<span>4006-371-555</span>
 			<span>0371-88888598</span>
@@ -38,7 +38,7 @@
                    <img id="avatar" src="${user.imgurl }">
 			    </c:if>
 			    <c:if test="${empty user.imgurl }">
-			      <img id="avatar" src="http://localhost:8080/Job100/img/avatar_lg.png">
+			      <img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png">
 			     </c:if>				
 			     </a>
 				<a id="lay_out" href="index?id=${user.id}">退出</a>
@@ -65,7 +65,7 @@
                                 <img id="avatar"  src="${user.imgurl }" width="200px;">
                         </c:if>
                         <c:if test="${empty user.imgurl }">
-                                 <img id="avatar" width="200px;" src="http://localhost:8080/Job100/img/avatar_lg.png">
+                                 <img id="avatar" width="200px;" src="${pageContext.request.contextPath}/img/avatar_lg.png">
                         </c:if>	
                         </div>
                         <div class="profile_ifo_area">
@@ -81,11 +81,11 @@
                                 </div>
                                 <div class="form_group">
                                     <span class="dd">确认新密码：</span>
-                                    <input id="NewMsgAgain" type="password"><span id="passMsg"></span>
+                                    <input id="newMsgAgain"  type="password"><span id="passMsg"></span>
                                 </div>
                                 <div class="form_submit dd">
                                 <!--onclick="return commitForm();"  -->
-                                    <input  value="保　存" type="submit" >
+                                    <input  value="保　存" type="submit" onclick="return commitForm();">
                                     <a >取消</a>
                                 </div>
                             </form>
@@ -101,17 +101,17 @@
 <footer>
 	<div class="container">
 		<ul>
-			<li><img src="img/footer_logo.png" alt="" id="foot_logo"></li>
+			<li><img src="${pageContext.request.contextPath}/img/footer_logo.png" alt="" id="foot_logo"></li>
 			<li>版权所有：智游3G教育　　　©&nbsp;www.zhiyou100.com</li>
-			<li><img src="img/a.png" alt="" id="wxgzh"></li>
+			<li><img src="${pageContext.request.contextPath}/img/a.png" alt="" id="wxgzh"></li>
 		</ul>
 	</div>
 </footer>
 
-<script src="js/jquery-1.js"></script>
-<script src="js/gVerify.js"></script>
-<script src="js/index.js"></script>
-<script src="js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-1.js"></script>
+<script src="${pageContext.request.contextPath}/js/gVerify.js"></script>
+<script src="${pageContext.request.contextPath}/js/index.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 
 <script type="text/javascript">
 var regIsCommitPsw=false;
@@ -123,7 +123,8 @@ $("#oldMsg").blur(function(){
       if(null==pass01 || ""==pass01 ){
           $("#oldMsg1").text("密码不能为空").css("color","red");
           regIsCommitPsw =false;
-      }else{
+     }else{
+    	  $("#oldMsg1").text("");
     	  if(pass01 != ${user.password}){
     		  $("#oldMsg1").text("密码错误").css("color","red");
     		  regIsCommitPsw =false;
@@ -141,6 +142,7 @@ $("#newMsg").blur(function(){
          $("#newMsg1").text("密码不能为空").css("color","red");
          regIsCommitPsw1 =false;
      }else{
+    	 $("#newMsg1").text("");
     	 if(pass03==pass01){
     		 regIsCommitPsw1 =false;
     	   $("#newMsg1").text("新密码不能和旧密码相同").css("color","red");
@@ -156,10 +158,12 @@ $("#newMsgAgain").blur(function(){
       var pass01= $("#newMsg").val();
       var pass02= $("#newMsgAgain").val();
    
-      if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
+      if( null==pass02 || ""==pass02){
           $("#passMsg").text("密码不能为空").css("color","red");
           regIsCommitPsw2 =false;
       }else{
+    	  $("#passMsg").text("");
+    	  
           if(pass01!=pass02){
         	  regIsCommitPsw2=false;
               $("#passMsg").text("两次密码输入不一致，请重新输入").css("color","red");

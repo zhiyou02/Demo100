@@ -21,14 +21,15 @@
      <select id="selectByID" resultMap="userMap">
          select * from user where id=#{id}
      </select>
-     <!--用户登录  -->
-     <select id="selectByAccounts" resultMap="userMap">
-         select * from user where accounts=#{accounts}
-     </select>
+    
      <!--用户注册  -->
      <insert id="add" parameterType="user">
          insert into user values(null,#{accounts},#{phone},#{password},#{nickname},#{sex},#{birthday},#{address},#{imgurl},null);
      </insert>
+      <!--用户登录  -->
+     <select id="selectByAccounts" resultMap="userMap">
+         select * from user where accounts=#{accounts}
+     </select>
      <!--修改资料  -->
      <update id="update" parameterType="user">                   
           update user
@@ -58,16 +59,37 @@
            where id =#{id}                
      </update>
      
-     <!-- 密码修改 -->
-  	<update id="passwordUp" parameterType="user">
-  		update user set password=#{password} where accounts=#{accounts}
-  	</update>
-  	<select id="selectAll" parameterType="user" resultMap="userMap">
+     	<select id="selectUser" resultMap="userMap">
   		select * from user
+		<where>
+			<if test="accounts!=null">
+				accounts=#{accounts}
+			</if>
+			<if test="phone!=null">
+				and phone=#{phone}
+			</if>
+			<if test="password!=null">
+				and password=#{password}
+			</if>
+			<if test="nickname!=null">
+				and nickname=#{nickname}
+			</if>
+			<if test="sex!=null">
+				and sex=#{sex}
+			</if>
+			<if test="birthday!=null">
+				and birthday=#{birthday}
+			</if>
+			<if test="address!=null">
+				and address=#{address}
+			</if>
+			<if test="imgurl!=null">
+				and imgurl=#{imgurl}
+			</if>
+		</where>
   	</select>
-  	<select id="selectAccounts" parameterType="user" resultMap="userMap">
-  		select * from user where accounts=#{accounts}
-  	</select>
+     
+    
         
      
 </mapper>  

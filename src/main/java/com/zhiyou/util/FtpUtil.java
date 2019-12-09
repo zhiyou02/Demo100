@@ -15,11 +15,11 @@ public class FtpUtil {
 		
 		
 		FTPClient ftp = new FTPClient();
-		String url="ftp://192.168.124.60/";
+		String url="ftp://192.168.124.81/";
 		
 		
 		try {
-			ftp.connect("192.168.124.60");
+			ftp.connect("192.168.124.81");
 			ftp.login("admin", "123");
 			ftp.enterLocalPassiveMode();
 			ftp.changeWorkingDirectory("/");

@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ 
+.d1{
+	margin: 10% auto;
+	width: 400px;
+	height: 300px;
+	background-color: rgb(255, 255, 255);
+	position: relative;
+ }
+ .d2{
+	
+	 width: 200px;
+	 height: 77px;
+	 position: absolute;
+	 left: 100px;
+	 top: 25px;
+ }
+ .d3{
+	 width: 200px;
+	 height: 77px;
+	 position: absolute;
+	 left: 100px;
+	 top: 100px;
+	color:rgb(136,136,136);
+ }
+ .d3>span{
+	 margin-left: 15px;
+	 position: relative;
+	 top:-10px;
+ }
+ .d4{
+	 width: 280px;
+	 height: 60px;
+	 position: absolute;
+	 left: 50px;
+	 top: 130px;
+ }
+ .d4>input{
+	 width: 280px;
+	 height: 30px;
+ }
+ .d5{
+	 width: 280px;
+	 height:60px;
+	 position: absolute;
+	 left: 50px;
+	 top: 170px;
+ }
+ .d5>input{
+	 width: 280px;
+	 height: 30px;
+ }
+ .d6{
+	 width: 280px;
+	 height: 60px;
+	 position: absolute;
+	 left: 50px;
+	 top: 220px;
+	
+ }
+ .d6>input{
+	 width: 284px;
+	 height: 40px;
+ }
+.first{
+  padding-top: 80px;
+}
+
+
+.d7{
+    width: 280px;
+	 height: 30px;
+	 position: absolute;
+	 left: 50px;
+	 top: 260px;
+	
+}
+
+
+
+
+
+

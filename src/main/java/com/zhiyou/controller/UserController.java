@@ -20,14 +20,6 @@ public class UserController {
 	@Autowired
 	UserService service;
 	/**
-	 * 用户登录
-	 */
-	@RequestMapping("login")
-	public void login(HttpServletRequest req,HttpServletResponse resp,User user, String accounts ) throws ServletException, IOException {
-		req.setAttribute("user",service.selectByAccounts(accounts));		
-		req.getRequestDispatcher("index.jsp").forward(req, resp);
-	}
-	/**
 	 * 个人中心
 	 */
 	@RequestMapping("/user")
@@ -105,11 +97,15 @@ public class UserController {
 	/**
 	 * 忘记密码
 	 */
-	@RequestMapping("forgetpassword")
-	public void forgetpwd(HttpServletRequest req,HttpServletResponse resp, User user, int id) throws ServletException, IOException {
+	@RequestMapping("/jsp/forgetpwd")
+	public void forgetpwd(HttpServletRequest req,HttpServletResponse resp, User user) throws ServletException, IOException {
 		User user2 =service.selectByAccounts(user.getAccounts());
-		req.setAttribute("user", user2);
-		req.getRequestDispatcher("index.jsp").forward(req, resp);
+		user2.setPassword(user.getPassword());
+		service.update(user2);
+		
+		resp.sendRedirect("../index.jsp");
+		
+		
 	}
 
 	

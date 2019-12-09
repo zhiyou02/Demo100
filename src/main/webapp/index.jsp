@@ -42,7 +42,7 @@
 		
 		<!-- 点击进入后台管理的登录界面  普通用户点击无效 -->
 		
-		<a target="_blank" href="adminLogin?id=${user.id}"><img src="img/we.png" draggable="false">后台管理</a>
+		<a target="_blank" id="login_open" href="Login.jsp" ><img src="img/we.png" draggable="false">后台管理</a>
 		
 		<a class="color_e4"><img src="img/phone.png" draggable="false"> 0371-88888598　　4006-371-555</a>
 	</div>
@@ -62,7 +62,7 @@
                     <tbody><tr>
                         <td colspan="2">
                             <!--点击跳到课程详情页-->
-                            <a href="http://localhost:8080/Job100/jsp/playVideo.jsp">
+                            <a href="webClass?accounts=${user.accounts}">
                                 <img src="img/html5.jpg" alt="" class="image scale" draggable="false">
                                 <div class="headline">
                                     <span>Web前端教程</span>
@@ -72,7 +72,7 @@
                         </td>
                         <td>
                             <!--点击跳到课程详情页-->
-                            <a href="http://localhost:8080/Job100/jsp/uiClass.jsp">
+                            <a href="uiClass?accounts=${user.accounts}">
                                 <img src="img/ui.jpg" alt="" class="image scale" draggable="false">
                                 <div class="headline">
                                     <span>UI设计教程</span>
@@ -102,7 +102,7 @@
                         </td>
                         <td colspan="2">
                         <!--点击跳到课程详情页-->
-                            <a href="http://localhost:8080/Job100/jsp/pyClass.jsp">
+                            <a href="pyClass?accounts=${user.accounts}">
                                 <img src="img/python.jpg" alt="" class="image scale" draggable="false">
                                 <div class="headline">
                                     <span>Python教程</span>
@@ -113,7 +113,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <a href="http://localhost:8080/Job100/jsp/phpClass.jsp">
+                            <a href="phpClass?accounts=${user.accounts}">
                                 <img src="img/php.jpg" alt="" class="image scale" draggable="false">
                                 <div class="headline">
                                     <span>PHP教程</span>
@@ -208,8 +208,8 @@
 			<form id="loginForm" action="login" method="post">			     
 			<!-- 登录  提交到login -->
 				<h3>快速登录</h3>
-				<input id="loginEmail" placeholder="请输入邮箱"  name="accounts" type="email">
-				<input id="loginPassword" placeholder="请输入密码" name="password" type="password">				
+				<input id="loginEmail" placeholder="请输入邮箱"  name="accounts" type="email"><span id="msg"></span>
+				<input id="loginPassword" placeholder="请输入密码" name="password" type="password"><span id="accMsg"></span>				
 				<div id="forget">								    
 				<!-- 忘记密码 跳到forgetpassword -->
 				    <a id="reg_open">注册</a>
@@ -217,7 +217,7 @@
 				</div>
 				<!-- onclick="return commitLogin()" -->
 				<!-- 有一个点击事件 获取到输入框输入的邮箱密码 进行Ajax验证  -->
-				<input  value="登　录" type="submit">
+				<input onclick="return result()" value="登　录" type="submit">
 			
 			</form>
 		</div>
@@ -242,7 +242,6 @@
 					<div id="v_container" style="width: 45%;height: 40px;float:right;"><canvas id="verifyCanvas" width="100" height="38" style="cursor: pointer;">您的浏览器版本不支持canvas</canvas><canvas id="verifyCanvas" width="100" height="38" style="cursor: pointer;">您的浏览器版本不支持canvas</canvas></div>
 				</div>
 				<!-- 点击事件+表单验证 返回值为false中断操作 -->
-				<!-- onclick="return commitRegForm();" -->
 				<input  value="注　册" type="submit">
 			</form>
 		</div>

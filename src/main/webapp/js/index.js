@@ -40,12 +40,14 @@ $(window).scroll(function () {
         });
     }
 });
+
+
 // 登录注册显示和消失弹出框
-$('#reg_open').click(function () {
+$("#reg_open").click(function () {
     $('#reg').removeClass('hidden');
 });
-$('#login_open').click(function () {
-    $('#login').removeClass('hidden');
+$("#login_open").click(function () {
+    $("#login").removeClass("hidden");
 });
 $('#reg_close').click(function(){
     $('#reg').addClass('hidden');
@@ -101,35 +103,35 @@ function GetUrlParam(paraName) {
 }
 
 
-
-
-//==========================Java02班升级JS===============================
-
+//注册邮箱验证
 $("#regEmail").blur(function(){
-
-    
-    //不为空再校验
     var emailVal=$("#regEmail").val();
-    //alert(emailVal);
-    // js 判断不相等  不能使用   !""==xxxx
     if(null != emailVal && ""!=emailVal){
-        var params={"email":emailVal};
-       // alert(params);
-        $.post("front/user/validateEmail.action",params,function(data){
-            if(data=="success"){
-               regIsCommitEmail=true;
-               $("#emailMsg").text("该邮箱可用").css("color","green");
-            }else{
-               regIsCommitEmail=false;
-               $("#emailMsg").text("该邮箱已注册，请直接登录").css("color","red");
+    	$("#emailMsg").text("");
+        $.ajax({
+        	type:"post",
+            url:"validateEmail",
+            data:{
+                name:$("#regEmail").val(),
+            },
+            success:function(data){
+                if(data=="false"){
+                    $("#emailMsg").text("账号可用").css("color","red");
+                    flag =false;
+                }else{
+                    $("#emailMsg").text("账号已存在，不可用").css("color","red");
+                    flag =true;
+                }
             }
-        });
+        })
+    }else{
+    	$("#emailMsg").text("邮箱不能为空").css("color","red");
     }
 
 });
 
 $("#regPswAgain").blur(function(){
-     var pass01= $("#regPsw").val();
+      var pass01= $("#regPsw").val();
       var pass02= $("#regPswAgain").val();
       if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
           $("#passMsg").text("密码不能为空").css("color","red");
@@ -159,30 +161,17 @@ var regIsCommitEmail=false;
 var regIsCommitPsw=false;
 var verifyCode;
 function commitRegForm(){
-     
      var code =$("input[name='yzm']").val();
      //alert(code);
      //alert(regIsCommitEmail+","+regIsCommitPsw);
          if(regIsCommitEmail && regIsCommitPsw && verifyCode.validate(code)){
-              //用js提交表单
-             // $("#regForm").commit();
-             
              $.ajax({
-              
-                url:"front/user/insertUser.action",
+                url:"insertUser",//ajax提交到insertuser进行表单验证
                 data:$("#regForm").serialize(),
                 type:"POST",
                 success:function(data){
                    if(data=='success'){
-                     /* //注册框消失
-                      $("#reg").addClass("hidden");
-                      
-                      $("#account").text($("#regEmail").val());
-                      //将注册的user信息展示
-                      $("#regBlock").css("display","none");
-                      $("#userBlock").css("display","block");*/
 					   document.location.reload();
-                      
                    }
                 },
                 error:function(){
@@ -196,33 +185,75 @@ function commitRegForm(){
      }else{
         return false;
      }
-      
-}
+                          
+}    
 
 verifyCode = new GVerify("v_container");
 
-function commitLogin(){
-   
-   var email =$("#loginEmail").val();
-   var password =$("#loginPassword").val();
-   if(null!=email && email!="" && null!=password && password!=""){
-        var params=$("#loginForm").serialize();
-       // alert(params);
-        // post要小写
-        $.post("front/user/loginUser.action",params,function(data){
-        // alert(data);
-                 if(data=='success'){
-                      document.location.reload();
-                   }
-        });
-        
+//登录用到的ajax验证
+var flag="false";
+var flag1="false";
+$("#loginEmail").blur(function(){
+    var account= $("#loginEmail").val();
+    if(null==account || ""==account ){
+        $("#msg").text("账号不能为空").css("color","red");
+        flag =false;
+    }else{
+    	$("#msg").text("");
+        $.ajax({
+        	type:"post",
+            url:"loginjudge",
+            data:{
+                name:$("#loginEmail").val(),
+            },
+            success:function(data){
+                if(data=="false"){
+                    $("#msg").text("账号不存在").css("color","red");
+                    flag =false;
+                }else{
+                    $("#msg").text("");
+                    flag =true;
+                }
+            }
+        })
+    }
+});
+$("#loginPassword").blur(function(){
+	var account= $("#loginEmail").val();
+    var pwd= $("#loginPassword").val();
+    if(null==pwd || ""==pwd ){
+        $("#accMsg").text("密码不能为空").css("color","red");
+        flag1 =false;
+    }else{
+        $.ajax({
+        	type:"post",
+            url:"pwdjudge",
+            data:{
+                name1:$("#loginPassword").val(),
+                name2:$("#loginEmail").val(),
+            },
+            success:function(data){
+                if(data=="false"){
+                    $("#accMsg").text("密码错误").css("color","red");
+                    flag1 =false;
+                }else{
+                    $("#accMsg").text("");
+                    flag1 =true;
+                }
+            }
+        })
+    }
+});
+
+function result(){
+    if(flag==true&&flag1==true){
+        return true;
+    }else{
         return false;
-   }
-   
-   return false;
+    }
 }
 
-
+//添加到收藏夹
 function addFavorite2() {
 	var url = window.location;
 	var title = document.title;

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--namespace：代表这个文件的命名空间，根据这个名称可以定位到这个文件  -->
+<mapper namespace="com.zhiyou.mapper.AdminMapper">
+
+       <resultMap type="admin" id="adminMap">
+    	<id column="admin_id" property="admin_id"/>
+    	<result column="accounts" property="accounts"/>
+    	<result column="password" property="password"/>
+    	<result column="admin_remark" property="admin_remark"/>
+    </resultMap>  
+    
+      <resultMap type="course" id="courseMap">
+    	<id column="id" property="id"/>
+    	<result column="course_title" property="course_title"/>
+    	<result column="course_desc" property="course_desc"/>
+    	<result column="subject_id" property="subject_id"/>
+    </resultMap> 
+    
+    <select id="select" parameterType="admin" resultMap="adminMap">
+  		select * from admin where accounts=#{accounts}
+  	</select>
+  	<select id="selectAll" parameterType="course" resultMap="courseMap">
+  		select * from course where course_title like '%' #{2} '%' limit #{0},#{1}
+  	</select>
+  	<select id="selectCount" resultType="integer" >
+  		select count(*) from course where course_title like '%' #{0} '%'
+  	</select>
+  	<select id="selectByID" resultType="course">
+  		select * from course where id=#{xxx}
+  	</select>
+  	
+  	<select id="selectCourseByID" resultMap="courseMap">
+  		select * from course where id=#{xxx}	
+  	</select>
+  	<select id="selectSubject" resultType="subject">
+  		select * from subject 	
+  	</select>
+  	<select id="selectName" resultType="subject">
+  		select * from subject where subject_name=#{subject_name}	
+  	</select>
+  	<select id="update" resultMap="courseMap">
+  		update course set course_title=#{course_title},course_desc=#{course_desc},subject_id=#{subject_id} where id=#{id}
+  	</select>
+  	<select id="add" resultMap="courseMap">
+  		insert into course values(#{id},#{course_title},#{course_desc},#{subject_id})
+  	</select>
+  	<delete id="delCourse">
+  		DELETE FROM COURSE WHERE ID=#{ID}
+  	</delete>
+  	<delete id="removeCourse" parameterType="list">
+    	DELETE FROM  COURSE  WHERE id IN
+    	<foreach collection="userIdList" item="id" open="(" separator="," close=")">
+        	#{id}
+    	</foreach>
+	</delete>
+  	
+  	
+
+        
+     
+</mapper>  

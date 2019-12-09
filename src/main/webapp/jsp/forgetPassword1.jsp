@@ -34,7 +34,7 @@
 				<li class="menu_active"><a>忘记密码</a></li>
 			</ul>
 			<div id="user_bar">
-				<a><img id="avatar" src="../img/avatar_lg.png"></a>
+				<a><img id="avatar" src="../timg/avatar_lg.png"></a>
 				<a href="http://localhost:8080/Job100/index.jsp">退出</a>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 		                </div>
                         <div class="profile_ifo_area">
                         
-                            <form action="forgetpwd" method="post" >
+                            <form action="forgetpwd1" method="post" >
                                 <div class="form_group">
                                     <span class="dd">用　户　名：</span>
                                     <input name="accounts" id="accounts" type="text"><span id="accmsg"></span>
@@ -105,12 +105,12 @@ $("#accounts").blur(function(){
     	$("#accmsg").text("");
         $.ajax({
         	type:"post",
-            url:"loginjudge",
+            url:"loginjudge1",
             data:{
                 name:$("#accounts").val(),
             },
             success:function(data){
-                if(data=="false"){
+                if(data=="true"){
                     $("#accmsg").text("账号不存在，请注册").css("color","red");
                     flag =false;
                 }else{
@@ -132,13 +132,13 @@ $("#password1").blur(function(){
 	}else{
 		 $.ajax({
 	        	type:"post",
-	            url:"pwdjudge",
+	            url:"pwdjudge1",
 	            data:{
-	                name1:$("#password1").val(),
-	                name2:$("#accounts").val(),
+	            	pwd:$("#password1").val(),
+	            	accounts:$("#accounts").val(),
 	            },
 	            success:function(data){
-	                if(data=="true"){
+	                if(data=="false"){
 	                    $("#newmsg").text("新密码不能和旧密码相同").css("color","red");
 	                    flag1 =false;
 	                }else{

@@ -12,9 +12,9 @@
 <meta name="description" content="智游教育在线课程视频,为您提供java,python,HTML5,UI,PHP,大数据等学科经典视频教程在线浏览学习,精细化知识点解析,深入浅出,想学不会都难,智游教育,学习成就梦想！">
 <meta name="author" content="司好">
 
-<link rel="stylesheet" href="http://localhost:8080/Job100/css/base.css">
-<link rel="stylesheet" href="http://localhost:8080/Job100/css/profile.css">
-<link rel="icon" href="http://localhost:8080/Job100/img/avatar_lg.png" type="image/png">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css">
+<link rel="icon" href="${pageContext.request.contextPath}/img/avatar_lg.png" type="image/png">
 <title>个人中心</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 
 <header>
 	<div class="container top_bar clearfix">
-		<img src="img/logo.png" alt="智游">
+		<img src="${pageContext.request.contextPath}/img/logo.png" alt="智游">
 		<div id="tele">
 			<span>4006-371-555</span>
 			<span>0371-88888598</span>
@@ -45,7 +45,7 @@
 				
 				<c:if test="${empty user.imgurl }">
 				  <a href="chartUp?id=${user.id}">						
-					<img id="avatar" src="img/avatar_lg.png" alt="" width="30px;">
+					<img id="avatar" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="" width="30px;">
 				  </a>
 				</c:if>
 				<a id="lay_out" href="index?id=${user.id}">退出</a>
@@ -71,7 +71,7 @@
                                 <img id="avatar" alt="图片走丢了" src="${user.imgurl }" width="200px;">
                             </c:if>
                             <c:if test="${empty user.imgurl }">
-                                 <img id="avatar" width="200px;" src="http://localhost:8080/Job100/img/avatar_lg.png" alt="">
+                                 <img id="avatar" width="200px;" src="${pageContext.request.contextPath}/img/avatar_lg.png" alt="">
                             </c:if>		                         		                                                                                           						    
                           <p>欢迎回来！</p>
                         </div>
@@ -91,9 +91,9 @@
     <footer>
         <div class="container">
             <ul>
-                <li><img src="img/footer_logo.png" alt="" id="foot_logo"></li>
+                <li><img src="${pageContext.request.contextPath}/img/footer_logo.png" alt="" id="foot_logo"></li>
                 <li>版权所有：智游3G教育　　　©&nbsp;www.zhiyou100.com</li>
-                <li><img src="img/a.png" alt="" id="wxgzh"></li>
+                <li><img src="${pageContext.request.contextPath}/img/a.png" alt="" id="wxgzh"></li>
             </ul>
         </div>
     </footer>
